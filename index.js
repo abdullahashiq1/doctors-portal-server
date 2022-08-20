@@ -112,12 +112,19 @@ async function run(){
             return res.send({success: true, result});
 
         });
+
         app.post('/doctor', async(req, res) =>{
             const doctor = req.body;
             const result = await doctorsCollection.insertOne(doctor);
             res.send(result);
 
+        });
+
+        app.get('/doctor', async (req, res) =>{
+            const doctors = await doctorsCollection.find().toArray();
+            res.send(doctors);
         })
+
 
     }
     finally{
